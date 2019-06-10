@@ -26,15 +26,25 @@ class ListNode {
     }
 }
 
+//todo:边界溢出
+
+// [9]
+//[1,9,9,9,9,9,9,9,9,9]
+
 class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
 
+        //基本测试
         ListNode l1 = new ListNode(0);
         l1.next = new ListNode(1);
         ListNode l2 = new ListNode(0);
         l2.next = new ListNode(2);
+
+        //边界溢出测试
+        //solution.long2ListNode(9999999991)
+
 
         ListNode l3 = solution.addTwoNumbers(l1, l2);
 
@@ -45,6 +55,7 @@ class Solution {
     }
 
 
+    @Deprecated
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         //参数校验
         if (l1 == null || l2 == null) {
@@ -54,8 +65,8 @@ class Solution {
             return null;
         }
         //将链表转为整数
-        int a = 0;
-        int b = 0;
+        long a = 0;
+        long b = 0;
         int i = 1;
         ListNode tempNode;
         tempNode = l1;
@@ -73,25 +84,37 @@ class Solution {
         }
 
         //相加
-        int res = a + b;
+        long res = a + b;
 
         //结果转链表返回
         i = 10;
-        int temp = 11;
+        ListNode head = long2ListNode(res);
+
+        return head.next;
+    }
+
+    /**
+     * 说明: int 转 ListNode
+     * @author  suwenguang
+     * @date    2019/6/10
+     * @return  n2.ListNode <- 返回类型
+     */
+    private ListNode long2ListNode(long res) {
+        ListNode tempNode;
+        long temp = 11;
 
         ListNode head = new ListNode(-1);
         tempNode = head;
 
         while (res / 10 > 0) {
             temp = res % 10;
-            ListNode next = new ListNode(temp);
+            ListNode next = new ListNode((int) temp);
             tempNode.next = next;
             tempNode = next;
             res /= 10;
         }
-        ListNode end = new ListNode(res);
+        ListNode end = new ListNode((int) res);
         tempNode.next = end;
-
-        return head.next;
+        return head;
     }
 }
