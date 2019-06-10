@@ -46,7 +46,7 @@ class Solution {
         //solution.long2ListNode(9999999991)
 
 
-        ListNode l3 = solution.addTwoNumbers(l1, l2);
+        ListNode l3 = solution.addTwoNumbersFail(l1, l2);
 
         while (l3 != null) {
             System.out.printf(String.valueOf(l3.val));
@@ -56,7 +56,7 @@ class Solution {
 
 
     @Deprecated
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbersFail(ListNode l1, ListNode l2) {
         //参数校验
         if (l1 == null || l2 == null) {
             return null;
@@ -65,39 +65,36 @@ class Solution {
             return null;
         }
         //将链表转为整数
-        long a = 0;
-        long b = 0;
-        int i = 1;
-        ListNode tempNode;
-        tempNode = l1;
-        while (tempNode != null) {
-            a = a + (tempNode.val * i);
-            tempNode = tempNode.next;
-            i *= 10;
-        }
-        i = 1;
-        tempNode = l2;
-        while (tempNode != null) {
-            b = b + (tempNode.val * i);
-            tempNode = tempNode.next;
-            i *= 10;
-        }
+        long a = listNode2Long(l1);
+        long b = listNode2Long(l2);
 
         //相加
         long res = a + b;
 
         //结果转链表返回
-        i = 10;
         ListNode head = long2ListNode(res);
 
         return head.next;
     }
 
+    private long listNode2Long(ListNode l2) {
+        int i = 1;
+        long res = 0;
+        ListNode tempNode;
+        tempNode = l2;
+        while (tempNode != null) {
+            res = res + (tempNode.val * i);
+            tempNode = tempNode.next;
+            i *= 10;
+        }
+        return res;
+    }
+
     /**
      * 说明: int 转 ListNode
-     * @author  suwenguang
-     * @date    2019/6/10
-     * @return  n2.ListNode <- 返回类型
+     * @author suwenguang
+     * @date 2019/6/10
+     * @return n2.ListNode <- 返回类型
      */
     private ListNode long2ListNode(long res) {
         ListNode tempNode;
