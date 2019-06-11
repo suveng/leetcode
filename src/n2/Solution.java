@@ -90,11 +90,7 @@ class Solution {
         while (l1 != null && l2 != null) {
             //相加进位
             int val = l1.val + l2.val + carrier.val;
-            if (val >= 10) {
-                carrier.next = new ListNode(1);
-            } else {
-                carrier.next = new ListNode(0);
-            }
+            getCarrier(carrier, val);
             //赋值res
             int remain = val % 10;
             temp.next = new ListNode(remain);
@@ -107,11 +103,7 @@ class Solution {
         }
         while (l1 != null) {
             int val = carrier.val + l1.val;
-            if (val >= 10) {
-                carrier.next = new ListNode(1);
-            } else {
-                carrier.next = new ListNode(0);
-            }
+            getCarrier(carrier, val);
 
             //赋值
             int remain = val % 10;
@@ -125,11 +117,7 @@ class Solution {
         }
         while (l2 != null) {
             int val = carrier.val + l2.val;
-            if (val >= 10) {
-                carrier.next = new ListNode(1);
-            } else {
-                carrier.next = new ListNode(0);
-            }
+            getCarrier(carrier, val);
 
             //赋值
             int remain = val % 10;
@@ -148,6 +136,14 @@ class Solution {
         }
 
         return res.next;
+    }
+
+    private void getCarrier(ListNode carrier, int val) {
+        if (val >= 10) {
+            carrier.next = new ListNode(1);
+        } else {
+            carrier.next = new ListNode(0);
+        }
     }
 
     /**
@@ -217,8 +213,7 @@ class Solution {
             tempNode = next;
             res /= 10;
         }
-        ListNode end = new ListNode((int) res);
-        tempNode.next = end;
+        tempNode.next = new ListNode((int) res);
         return head.next;
     }
 }
