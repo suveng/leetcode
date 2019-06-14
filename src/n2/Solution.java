@@ -28,6 +28,9 @@ package n2;
  */
 
 class ListNode {
+    /**
+     *
+     */
     int val;
 
     ListNode next;
