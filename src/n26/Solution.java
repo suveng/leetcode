@@ -11,13 +11,13 @@ public class Solution {
         Solution solution = new Solution();
         int res = 0;
 
-        res=solution.removeDuplicates(new int[]{1,1,2});
+        res = solution.removeDuplicates(new int[]{1, 1, 2});
         System.out.println(res);
 
-        res=solution.removeDuplicates(new int[]{0,0,1,1,1,2,2,3,3,4});
+        res = solution.removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
         System.out.println(res);
 
-        res=solution.removeDuplicates(new int[]{1,2,2});
+        res = solution.removeDuplicates(new int[]{1, 2, 2});
         System.out.println(res);
     }
 
@@ -64,22 +64,43 @@ public class Solution {
      * 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      **/
+
     public int removeDuplicates(int[] nums) {
+        //采用双指针
+        int i , j=0;
+        for(i=1;i<nums.length;i++){
+            if (nums[j]!=nums[i]){
+                j++;
+                nums[j]=nums[i];
+            }
+        }
+        return j+1;
+    }
+
+    /**
+     * 说明: 重复复制了,浪费CPU,但是可以解决无序的数组
+     *
+     * @author  suwenguang
+     * @date    2019/6/20
+     * @return  int <- 返回类型
+     */
+    @Deprecated
+    public int removeDuplicatesV1(int[] nums) {
         int res = nums.length;
-        int i =1;
-        while (i<res){
-            boolean bool=false;
+        int i = 1;
+        while (i < res) {
+            boolean bool = false;
             //和前面的比
-            for (int j = i; j > 0 ; j--) {
-                if (nums[j-1]==nums[i]){
-                    System.arraycopy(nums, i, nums, i-1, res-i);
+            for (int j = i; j > 0; j--) {
+                if (nums[j - 1] == nums[i]) {
+                    System.arraycopy(nums, i, nums, i - 1, res - i);
                     res--;
-                    bool=true;
+                    bool = true;
                     break;
                 }
             }
 
-            if (!bool){
+            if (!bool) {
                 i++;
             }
         }
