@@ -3,7 +3,7 @@
  * Copyright (c) 2013-2021 All Rights Reserved.
  */
 
-package sort;
+package sort.bubble;
 
 /**
  * @author suwenguang
